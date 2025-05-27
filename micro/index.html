@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SMART HELMET</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .helmet {
+            width: 80px; /* Reduced size (adjust as needed) */
+            height: auto; /* Maintains aspect ratio */
+            vertical-align: middle; /* Aligns with header text */
+            margin-right: 10px; /* Optional spacing between image and title */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-profile">
+            <span id="user-name">Hello, User</span>
+            <button id="logout-btn" class="logout-btn">Logout</button>
+        </div>
+
+        <div class="header">
+            <img src="helmet.png" alt="Helmet Icon" class="helmet">
+            <h1>SMART HELMET</h1>
+        </div>
+
+        <div class="dashboard">
+            <div class="helmet-panel">
+                <div class="status-panel">
+                    <h2>Helmet 1</h2>
+                    <div id="status-box-1" class="status-box">Checking...</div>
+                    <p>Status: <span id="helmet1_status">Loading...</span></p>
+                    <p>Alcohol Level: <span id="helmet1_alcohol">Loading...</span></p>
+                    <p>Rider Status: <span id="helmet1_rider">Loading...</span></p>
+                </div>
+                <div class="chart-section">
+                    <h3>Alcohol Chart</h3>
+                    <canvas id="alcoholChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+
+            <div class="helmet-panel">
+                <div class="status-panel">
+                    <h2>Helmet 2</h2>
+                    <div id="status-box-2" class="status-box">Checking...</div>
+                    <p>Status: <span id="helmet2_status">Loading...</span></p>
+                    <p>Alcohol Level: <span id="helmet2_alcohol">Loading...</span></p>
+                    <p>Rider Status: <span id="helmet2_rider">Loading...</span></p>
+                </div>
+                <div class="chart-section">
+                    <h3>Alcohol Chart</h3>
+                    <canvas id="alcoholChart2" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
+        import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
+
+      const firebaseConfig = {
+  apiKey: "AIzaSyDvkL43aaX6u97kDZvPJrTfYnsc-PJTxgQ",
+  authDomain: "fir-pit-552c4.firebaseapp.com",
+  databaseURL: "https://fir-pit-552c4-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "fir-pit-552c4",
+  storageBucket: "fir-pit-552c4.firebasestorage.app",
+  messagingSenderId: "177480187812",
+  appId: "1:177480187812:web:397010de9e9cc7c9778b31"
+};
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getDatabase(app);
+
+        const userNameDisplay = document.getElementById("user-name");
+
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                try {
+                    const nameSnap = await get(ref(db, `users/${user.uid}/name`));
+                    const name = nameSnap.exists() ? nameSnap.val() : user.email;
+                    userNameDisplay.textContent = `Hello, ${name}`;
+                } catch (error) {
+                    userNameDisplay.textContent = `Hello, ${user.email}`;
+                }
+            } else {
+                window.location.href = "login.html";
+            }
+        });
+
+        document.getElementById("logout-btn").addEventListener("click", () => {
+            signOut(auth).then(() => {
+                window.location.href = "login.html";
+            });
+        });
+    </script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
