@@ -1,0 +1,220 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  margin: 0;
+  padding: 20px;
+  color: #e0e0e0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.helmet-icon {
+  width: 60px;
+  height: 60px;
+  filter: brightness(0) invert(1);
+}
+
+h1 {
+  color: #00d4ff;
+  margin: 0;
+  font-size: 2em;
+  text-shadow: 0 0 10px #00d4ff;
+  text-transform: uppercase;
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.helmet-panel {
+  display: flex;
+  gap: 20px;
+  background: #2a2e3d;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  flex-wrap: wrap;
+}
+
+.status-panel {
+  flex: 1 1 200px;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: #333745;
+}
+
+.status-box {
+  padding: 10px;
+  text-align: center;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  transition: background 0.3s, color 0.3s;
+}
+
+.status-box.worn {
+  background-color: #00ff99; /* Green for worn */
+  color: #1a1a2e;
+}
+
+.status-box.not-worn {
+  background-color: #ff4c4c; /* Red for not worn */
+  color: #fff;
+}
+
+.status-panel h2 {
+  color: #00d4ff;
+  margin: 0 0 10px;
+  text-align: center;
+  font-size: 1.5em;
+  text-transform: uppercase;
+}
+
+.status-panel p {
+  margin: 8px 0;
+  font-size: 0.95em;
+}
+
+.chart-section {
+  flex: 2 1 400px;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: #333745;
+}
+
+.chart-section h3 {
+  color: #00d4ff;
+  margin: 0 0 10px;
+  text-align: center;
+  font-size: 1.2em;
+  text-transform: uppercase;
+}
+
+canvas {
+  border-radius: 8px;
+  background: #444;
+  width: 100% !important;
+  height: auto !important;
+}
+
+.header-profile {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+#user-name {
+  font-size: 1.1em;
+  color: #00d4ff;
+  position: relative;
+}
+
+.logout-btn {
+  background: #ff4c4c;
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.logout-btn:hover {
+  background: #e63636;
+}
+
+.profile-dropdown {
+  display: none;
+  position: absolute;
+  top: 35px;
+  right: 0;
+  background: #2a2e3d;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+
+.profile-dropdown button {
+  background: transparent;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+
+.profile-dropdown button:hover {
+  background-color: #ff4c4c;
+}
+
+#user-name:hover + .profile-dropdown,
+.profile-dropdown:hover {
+  display: block;
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+  .dashboard {
+      grid-template-columns: 1fr;
+  }
+
+  .header {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .header-profile {
+      position: static;
+      margin-bottom: 20px;
+  }
+}
+/* Reset Password Page Button Styling */
+.reset-container button {
+  background-color: #00d4ff;
+  color: #1a1a2e;
+  font-weight: bold;
+  cursor: pointer;
+  width: auto;               /* Fit to content */
+  padding: 12px 24px;        /* Comfortable spacing */
+  display: block;            /* Allows margin auto */
+  margin: 8px auto;          /* Center horizontally */
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.auth-container button {
+  background-color: #00d4ff;
+  color: #1a1a2e;
+  font-weight: bold;
+  cursor: pointer;
+  width: auto;               /* Fit content */
+  padding: 12px 24px;        /* Balanced spacing */
+  display: block;            /* Block to center using margin auto */
+  margin: 10px auto 0 auto;  /* Top margin and center horizontally */
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
